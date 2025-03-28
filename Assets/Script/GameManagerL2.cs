@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GameManagerL2 : MonoBehaviour
 {
     public TextMeshProUGUI questionText;
     public TMP_InputField answerInput;
@@ -37,18 +37,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < maxQuestions; i++)
         {
             int num1 = Random.Range(10, 50);
-            int num2 = Random.Range(10, 50);
-            bool isAddition = Random.value > 0.5f;
+            int num2 = Random.Range(1, 10);
+            bool isMultiplication = Random.value > 0.5f;
 
-            if (isAddition)
+            if (isMultiplication)
             {
-                correctAnswers[i] = num1 + num2;
-                PlayerPrefs.SetString($"Question{i}", $"{num1} + {num2} = ?");
+                correctAnswers[i] = num1 * num2;
+                PlayerPrefs.SetString($"Question{i}", $"{num1} ¡¿ {num2} = ?");
             }
             else
             {
-                correctAnswers[i] = num1 - num2;
-                PlayerPrefs.SetString($"Question{i}", $"{num1} - {num2} = ?");
+                int dividend = num1 * num2;
+                correctAnswers[i] = num1;
+                PlayerPrefs.SetString($"Question{i}", $"{dividend} ¡À {num2} = ?");
             }
         }
     }
@@ -122,11 +123,11 @@ public class GameManager : MonoBehaviour
 
     public void RetryGame()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level2");
     }
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Level3");
     }
 }

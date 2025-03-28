@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 89322244}
-  - component: {fileID: 89322243}
+  - component: {fileID: 89322245}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -188,30 +188,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &89322243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89322242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02aec70490ad8374d9df66fa404651e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionText: {fileID: 1028540848}
-  answerInput: {fileID: 97003779}
-  hearts:
-  - {fileID: 937580414}
-  - {fileID: 331524549}
-  - {fileID: 1096223010}
-  gameOverPanel: {fileID: 1501347561}
-  resultText: {fileID: 1740602170}
-  messageText: {fileID: 632162357}
-  nextLevelButton: {fileID: 814322915}
-  retryButton: {fileID: 963239224}
-  tryAgainButton: {fileID: 1456478657}
 --- !u!4 &89322244
 Transform:
   m_ObjectHideFlags: 0
@@ -227,6 +203,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &89322245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89322242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed86b117aaa7534bada25b6ded623e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionText: {fileID: 1028540848}
+  answerInput: {fileID: 97003779}
+  hearts:
+  - {fileID: 937580414}
+  - {fileID: 331524549}
+  - {fileID: 1096223010}
+  gameOverPanel: {fileID: 1501347561}
+  resultText: {fileID: 1740602170}
+  messageText: {fileID: 632162357}
+  nextLevelButton: {fileID: 814322915}
+  retryButton: {fileID: 963239224}
+  tryAgainButton: {fileID: 1456478657}
 --- !u!1 &97003777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,8 +1060,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89322243}
-        m_TargetAssemblyTypeName: GameManagerL1, Assembly-CSharp
+      - m_Target: {fileID: 89322245}
+        m_TargetAssemblyTypeName: GameManagerL2, Assembly-CSharp
         m_MethodName: LoadNextLevel
         m_Mode: 1
         m_Arguments:
@@ -1435,8 +1435,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89322243}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 89322245}
+        m_TargetAssemblyTypeName: GameManagerL2, Assembly-CSharp
         m_MethodName: RetryGame
         m_Mode: 1
         m_Arguments:
@@ -2018,8 +2018,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89322243}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 89322245}
+        m_TargetAssemblyTypeName: GameManagerL2, Assembly-CSharp
         m_MethodName: RetryGame
         m_Mode: 1
         m_Arguments:
@@ -2524,8 +2524,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89322243}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 89322245}
+        m_TargetAssemblyTypeName: GameManagerL2, Assembly-CSharp
         m_MethodName: SubmitAnswer
         m_Mode: 1
         m_Arguments:
