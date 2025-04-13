@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
 
 public class GameManagerL2 : MonoBehaviour
 {
@@ -13,6 +15,14 @@ public class GameManagerL2 : MonoBehaviour
     public GameObject nextLevelButton;
     public GameObject retryButton;
     public GameObject tryAgainButton;
+    public AudioSource sfxSource;
+    public AudioClip correctClip;
+    public AudioClip wrongClip;
+    public Image farmerImage;
+    public Sprite neutralSprite;
+    public Sprite correctSprite;
+    public Sprite wrongSprite;
+
 
     private int[] correctAnswers;
     private int currentQuestionIndex;
@@ -66,6 +76,21 @@ public class GameManagerL2 : MonoBehaviour
         }
     }
 
+    void PlaySound(bool isCorrect)
+    {
+        if (isCorrect)
+            sfxSource.PlayOneShot(correctClip);
+        else
+            sfxSource.PlayOneShot(wrongClip);
+    }
+
+    IEnumerator ShowFarmerReaction(Sprite reactionSprite)
+    {
+        farmerImage.sprite = reactionSprite;
+        yield return new WaitForSeconds(1f);
+        farmerImage.sprite = neutralSprite;
+    }
+
     public void SubmitAnswer()
     {
         int playerAnswer;
@@ -74,10 +99,14 @@ public class GameManagerL2 : MonoBehaviour
         if (isNumeric && playerAnswer == correctAnswers[currentQuestionIndex])
         {
             score++;
+            PlaySound(true);
+            StartCoroutine(ShowFarmerReaction(correctSprite));
         }
         else
         {
             ReduceLife();
+            PlaySound(false);
+            StartCoroutine(ShowFarmerReaction(wrongSprite));
         }
 
         currentQuestionIndex++;
