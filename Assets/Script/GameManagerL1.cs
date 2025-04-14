@@ -15,6 +15,8 @@ public class GameManagerL1 : MonoBehaviour
     public GameObject nextLevelButton;
     public GameObject retryButton;
     public GameObject tryAgainButton;
+    public GameObject toTitleButton1;
+    public GameObject toTitleButton2;
     public AudioSource sfxSource;
     public AudioClip correctClip;
     public AudioClip wrongClip;
@@ -22,12 +24,15 @@ public class GameManagerL1 : MonoBehaviour
     public Sprite neutralSprite;
     public Sprite correctSprite;
     public Sprite wrongSprite;
+    public TextMeshProUGUI scoreText;
+
 
     private int[] correctAnswers;
     private int currentQuestionIndex;
     private int score;
     private int lives;
     private int maxQuestions = 10;
+    private int correctCount = 0;
 
     void Start()
     {
@@ -36,6 +41,7 @@ public class GameManagerL1 : MonoBehaviour
         score = 0;
         GenerateQuestions();
         ShowQuestion();
+        UpdateScoreText();
         gameOverPanel.SetActive(false);
     }
 
@@ -45,6 +51,11 @@ public class GameManagerL1 : MonoBehaviour
             sfxSource.PlayOneShot(correctClip);
         else
             sfxSource.PlayOneShot(wrongClip);
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = $": {score}";
     }
 
     void GenerateQuestions()
@@ -96,9 +107,11 @@ public class GameManagerL1 : MonoBehaviour
 
         if (isNumeric && playerAnswer == correctAnswers[currentQuestionIndex])
         {
-            score++;
+            score += 10;
+            correctCount++;
             PlaySound(true);
             StartCoroutine(ShowFarmerReaction(correctSprite));
+            UpdateScoreText();
         }
         else
         {
@@ -130,7 +143,9 @@ public class GameManagerL1 : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
 
-        resultText.text = $"{score}/{maxQuestions} Correct!";
+        resultText.text = $"{correctCount}/{maxQuestions} Correct!";
+
+        PlayerPrefs.SetInt("Score", score);
 
         if (lives == 0)
         {
@@ -138,6 +153,8 @@ public class GameManagerL1 : MonoBehaviour
             retryButton.SetActive(true);
             nextLevelButton.SetActive(false);
             tryAgainButton.SetActive(false);
+            toTitleButton1.SetActive(true);
+            toTitleButton2.SetActive(false);
         }
         else
         {
@@ -145,6 +162,8 @@ public class GameManagerL1 : MonoBehaviour
             nextLevelButton.SetActive(true);
             tryAgainButton.SetActive(true);
             retryButton.SetActive(false);
+            toTitleButton1.SetActive(false);
+            toTitleButton2.SetActive(true);
         }
     }
 
@@ -156,5 +175,10 @@ public class GameManagerL1 : MonoBehaviour
     public void LoadNextLevel()
     {
         SceneManager.LoadScene("Level2");
+    }
+
+    public void GoToTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 }

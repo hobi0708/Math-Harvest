@@ -22,18 +22,21 @@ public class GameManagerL3 : MonoBehaviour
     public Sprite neutralSprite;
     public Sprite correctSprite;
     public Sprite wrongSprite;
+    public TextMeshProUGUI scoreText;
+
 
     private int[] correctAnswers;
     private int currentQuestionIndex;
     private int score;
     private int lives;
     private int maxQuestions = 10;
+    private int correctCount = 0;
 
     void Start()
     {
         lives = hearts.Length;
         currentQuestionIndex = 0;
-        score = 0;
+        score = PlayerPrefs.GetInt("Score", 0);
         GenerateQuestions();
         ShowQuestion();
         gameOverPanel.SetActive(false);
@@ -108,10 +111,12 @@ public class GameManagerL3 : MonoBehaviour
 
         if (isNumeric && playerAnswer == correctAnswers[currentQuestionIndex])
         {
-            score++;
+            score += 10;
+            correctCount++;
             PlaySound(true);
             StartCoroutine(ShowFarmerReaction(correctSprite));
         }
+
         else
         {
             ReduceLife();
@@ -142,7 +147,9 @@ public class GameManagerL3 : MonoBehaviour
     void GameOver()
     {
         gameOverPanel.SetActive(true);
-        resultText.text = $"{score}/{maxQuestions} Correct!";
+        resultText.text = $"{correctCount}/{maxQuestions} Correct!";
+
+        PlayerPrefs.SetInt("Score", score);
 
         if (lives == 0)
         {
