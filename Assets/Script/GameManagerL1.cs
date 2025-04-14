@@ -179,6 +179,7 @@ public class GameManagerL1 : MonoBehaviour
 
     public void GoToTitle()
     {
+        PlayerPrefs.SetInt("Score", 0);
         SceneManager.LoadScene("Title");
     }
 }

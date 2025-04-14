@@ -40,6 +40,7 @@ public class GameManagerL3 : MonoBehaviour
         GenerateQuestions();
         ShowQuestion();
         gameOverPanel.SetActive(false);
+        UpdateScoreText();
     }
 
     void GenerateQuestions()
@@ -115,6 +116,7 @@ public class GameManagerL3 : MonoBehaviour
             correctCount++;
             PlaySound(true);
             StartCoroutine(ShowFarmerReaction(correctSprite));
+            UpdateScoreText();
         }
 
         else
@@ -169,11 +171,17 @@ public class GameManagerL3 : MonoBehaviour
 
     public void GoToTitle()
     {
+        PlayerPrefs.SetInt("Score", 0);
         SceneManager.LoadScene("Title");
     }
 
     public void RetryGame()
     {
         SceneManager.LoadScene("Level3");
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = $": {score}";
     }
 }
